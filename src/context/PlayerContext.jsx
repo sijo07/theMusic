@@ -16,6 +16,10 @@ export const PlayerProvider = ({ children }) => {
         const saved = localStorage.getItem('favorites');
         return saved ? JSON.parse(saved) : [];
     });
+    const [playlists, setPlaylists] = useState(() => {
+        const saved = localStorage.getItem('playlists');
+        return saved ? JSON.parse(saved) : [];
+    });
 
     const audioRef = useRef(new Audio());
 
@@ -40,6 +44,10 @@ export const PlayerProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }, [favorites]);
+
+    useEffect(() => {
+        localStorage.setItem('playlists', JSON.stringify(playlists));
+    }, [playlists]);
 
     const playTrack = (track, newQueue = []) => {
         if (currentTrack?.previewUrl === track.previewUrl) {
@@ -134,6 +142,42 @@ export const PlayerProvider = ({ children }) => {
         return favorites.some(f => f.previewUrl === targetUrl);
     };
 
+    // Playlist Methods
+    const createPlaylist = (name) => {
+        const newPlaylist = {
+            id: Date.now().toString(),
+            name,
+            tracks: [],
+            createdAt: new Date().toISOString()
+        };
+        setPlaylists([...playlists, newPlaylist]);
+        return newPlaylist;
+    };
+
+    const deletePlaylist = (playlistId) => {
+        setPlaylists(playlists.filter(p => p.id !== playlistId));
+    };
+
+    const addToPlaylist = (playlistId, track) => {
+        setPlaylists(playlists.map(p => {
+            if (p.id === playlistId) {
+                // Prevent duplicates
+                if (p.tracks.some(t => t.previewUrl === track.previewUrl)) return p;
+                return { ...p, tracks: [...p.tracks, track] };
+            }
+            return p;
+        }));
+    };
+
+    const removeFromPlaylist = (playlistId, trackUrl) => {
+        setPlaylists(playlists.map(p => {
+            if (p.id === playlistId) {
+                return { ...p, tracks: p.tracks.filter(t => t.previewUrl !== trackUrl) };
+            }
+            return p;
+        }));
+    };
+
     const value = {
         currentTrack,
         isPlaying,
@@ -142,6 +186,7 @@ export const PlayerProvider = ({ children }) => {
         duration,
         volume,
         favorites,
+        playlists,
         playTrack,
         togglePlay,
         nextTrack,
@@ -149,7 +194,11 @@ export const PlayerProvider = ({ children }) => {
         changeVolume,
         seek,
         toggleFavorite,
-        isFavorite
+        isFavorite,
+        createPlaylist,
+        deletePlaylist,
+        addToPlaylist,
+        removeFromPlaylist
     };
 
     return (

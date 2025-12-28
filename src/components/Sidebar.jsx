@@ -9,7 +9,7 @@ const Sidebar = () => {
     ];
 
     return (
-        <div className="w-24 lg:w-64 h-[90vh] glass-panel rounded-3xl flex flex-col items-center lg:items-start py-8 m-4 shadow-glass transition-all duration-300">
+        <div className="w-24 lg:w-64 h-screen glass-panel rounded-r-[40px] flex flex-col items-center lg:items-start py-8 shadow-glass transition-all duration-300">
             {/* Logo */}
             <div className="mb-1 w-full px-2">
                 <Link to="/">
@@ -36,10 +36,11 @@ const Sidebar = () => {
 
             {/* Bottom Section */}
             <div className="mt-auto px-4 w-full">
-                <div className="p-4 rounded-2xl bg-gradient-to-br from-neonPink/20 to-neonBlue/20 border border-white/10 hidden lg:block relative overflow-hidden group cursor-pointer">
-                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <p className="text-xs font-bold text-neonPink uppercase mb-1">Go Premium</p>
-                    <p className="text-sm font-bold text-white leading-tight">Unlock high fidelity sound.</p>
+                <div className="group relative p-5 rounded-[28px] bg-gradient-to-br from-[#FF0080] to-[#7928CA] overflow-hidden cursor-pointer shadow-lg hover:shadow-[#FF0080]/30 transition-all duration-500 hidden lg:block">
+                    <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors"></div>
+                    <p className="text-[10px] font-black text-white/70 uppercase tracking-[2px] mb-2">Exclusive</p>
+                    <p className="text-base font-black text-white leading-tight">Go Premium</p>
+                    <p className="text-[11px] text-white/60 mt-1 font-medium">Unlock Hi-Fi Sound.</p>
                 </div>
             </div>
         </div>

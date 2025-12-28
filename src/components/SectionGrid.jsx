@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import Card from './Card';
 
-const SectionGrid = ({ title, items, roundImage = false, showAllLink = false }) => {
+const SectionGrid = ({ title, items, roundImage = false, showAllLink = false, onRemove }) => {
     const scrollRef = useRef(null);
 
     const scroll = (direction) => {
@@ -49,6 +49,7 @@ const SectionGrid = ({ title, items, roundImage = false, showAllLink = false }) 
                             previewUrl={item.previewUrl}
                             queue={items}
                             roundImage={roundImage}
+                            onRemove={onRemove}
                         />
                     </div>
                 ))}

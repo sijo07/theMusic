@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
             <MobileNav />
 
             {/* Main Content */}
-            <div className="flex-1 md:ml-32 lg:ml-72 relative z-10 h-screen overflow-y-auto overflow-x-hidden pt-4 pb-32 flex flex-col">
+            <div id="main-content" className="flex-1 md:ml-24 lg:ml-64 relative z-10 h-screen overflow-y-auto overflow-x-hidden pb-32 flex flex-col">
                 <Header />
                 <div className="flex-grow px-4 md:px-6">
                     {children}
